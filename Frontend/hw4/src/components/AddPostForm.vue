@@ -4,7 +4,7 @@
             <h3>Add Post</h3>
             <div class="input-group">
                 <label for="body" class="subtext">Body: </label>
-                <input name="body" type="text" id="body" required v-model="post.body" />
+                <textarea name="body" type="text" id="body" style="font-size:larger" required v-model="post.body"></textarea>
             </div>
             <button @click="addPost" class="addPost">Add</button>
         </div>

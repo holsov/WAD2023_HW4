@@ -4,7 +4,7 @@
             <h3>A Post</h3>
             <div class="input-group">
                 <label for="body" class="subtext">Body: </label>
-                <input name="body" type="text" id="body" required v-model="post.body" />
+                <textarea name="body" type="text" id="body" style="font-size:larger" required v-model="post.body"></textarea>
             </div>
             <div class="input-group">
                 <button @click="alterPost" class="button1">Update</button>
@@ -115,7 +115,7 @@ export default {
     justify-content: right;
     margin: auto;
     border-radius: 15px;
-    height:200px;
+    height:220px;
   }
   div.input-group {
     display: flex;
