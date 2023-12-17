@@ -23,6 +23,7 @@ const routes = [
     name: 'about',
     component: () => import( '../views/AboutView.vue')
   },
+  
   {
     path: '/addpost',
     name: 'AddPostPage',

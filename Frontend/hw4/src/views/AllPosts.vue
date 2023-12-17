@@ -9,10 +9,10 @@
       <ul>
         <div v-if = "authResult" class="item" v-for="post in posts" :key="post.id">
           <!-- / We are putting an anchor for each post, when we click on it, we will be directed to the specific post view (/apost/) /  -->
-          <a class="singlepost" :href="'/api/apost/' + post.id">
-              <span class="date">{{ post.date }} </span>
-              <span class="body"> {{ post.body }} </span>            
-          </a>
+          <router-link :to="'/apost/' + post.id" class="singlepost">
+            <span class="date">{{ post.date }} </span>
+            <span class="body"> {{ post.body }} </span>
+          </router-link>
         </div>
       </ul>
     </div>
@@ -77,7 +77,6 @@ export default {
     },
     AddPost(){
       try{
-        console.log("error deleteing");
         this.$router.push("/addpost");}
       catch(e){
         console.log(e)
