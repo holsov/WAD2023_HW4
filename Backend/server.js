@@ -2,6 +2,7 @@
 const express = require('express');
 const pool = require('./database');
 const cors = require('cors')
+
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -12,8 +13,11 @@ app.use(cors());
 // It parses incoming requests with JSON payloads and is based on 
 app.use(express.json());
 
+app.listen(port, () => {
+  console.log("Server is listening to port " + port)
+});
 //Code goes here
-app.get('/api/posts', async (req, res) => {
+app.get('/api/getposts/', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM posts');
       res.json(result.rows);

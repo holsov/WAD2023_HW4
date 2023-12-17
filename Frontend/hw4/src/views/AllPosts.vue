@@ -52,7 +52,7 @@ export default {
     fetchPosts() {
       // You should remember how Fetch API works
       // fetch is a GET request unless stated otherwise. Therefore, it will fetch all posts from the database
-      fetch(`http://localhost:3000/api/posts/`,{
+      fetch(`http://localhost:3000/api/getposts/`,{
         //credentials: 'include', //uncommment this once authentification is done
             })
         .then((response) => response.json())
@@ -79,7 +79,6 @@ export default {
     },
     AddPost(){
       try{
-        console.log("error deleteing");
         this.$router.push("/addpost");}
       catch(e){
         console.log(e)
