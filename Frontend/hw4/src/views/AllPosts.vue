@@ -7,9 +7,9 @@
     <button v-if = "authResult" @click="DeleteAll" class="center">Delete all posts</button>
     </div>
       <ul>
-        <div v-if = "authResult" class="item" v-for="post in posts" :key="post.id">
+        <div  class="item" v-for="post in posts" :key="post.id">
           <!-- / We are putting an anchor for each post, when we click on it, we will be directed to the specific post view (/apost/) /  -->
-          <router-link :to="'/apost/' + post.id" class="singlepost">
+          <router-link :to="'api/apost/' + post.id" class="singlepost">
             <span class="date">{{ post.date }} </span>
             <span class="body"> {{ post.body }} </span>
           </router-link>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import AllPosts from '../views/AllPosts.vue'
 import AddPostPage from '@/views/AddPostPage.vue'
+import Apost from '@/views/Apost.vue'
 import LoginPage from '@/views/LoginPage.vue'
 import SignUpPage from '@/views/SignUpPage.vue'
 import auth from "../auth.js";
@@ -14,7 +15,7 @@ const routes = [
             if (!authResult) {
                 next('/login')
             } else {
-                next("/");
+                next();
             }
         }
     },
@@ -29,6 +30,11 @@ const routes = [
     name: 'AddPostPage',
     component: AddPostPage
   },
+  {
+    path: "/api/apost/:id",
+    name: "Apost",
+    component: Apost,
+},
   {
     path: "/login",
     name: "LogIn",
