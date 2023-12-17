@@ -2,11 +2,12 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: "SalamanderWAD",
-    database: "WADHW4",
+    password: "parool",
+    database: "testWAD",
     host: "localhost",
-    port: "5432"
+    port: "5433"
 });
+
 const execute = async(query) => {
     try {
         await pool.connect(); // create a connection
@@ -33,7 +34,7 @@ const createTblQueryPosts = `
     CREATE TABLE IF NOT EXISTS "posts" (
         id SERIAL PRIMARY KEY ,
         body VARCHAR(1000) NOT NULL UNIQUE,
-        date DATE NOT NULL 
+        date VARCHAR NOT NULL 
     );`;
 
 execute(createTblQueryUsers).then(result => {

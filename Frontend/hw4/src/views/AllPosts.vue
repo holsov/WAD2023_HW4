@@ -77,6 +77,14 @@ export default {
         console.log("error deleteing");
       });
     },
+    AddPost(){
+      try{
+        console.log("error deleteing");
+        this.$router.push("/addpost");}
+      catch(e){
+        console.log(e)
+      }
+    }
   },
   mounted() {
     // call fetchPosts() when this element (AllPosts) mounts 
