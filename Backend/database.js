@@ -2,23 +2,27 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: "parool",
+    password: "supersecret",
     database: "testWAD",
     host: "localhost",
-    port: "5433"
+    port: "5432"
 });
 
-const execute = async(query) => {
+const execute = async (query) => {
+    let client;
     try {
-        await pool.connect(); // create a connection
-        await pool.query(query); // executes a query
+        client = await pool.connect(); // create a connection
+        await client.query(query); // executes a query
         return true;
     } catch (error) {
-        console.error(error.stack);
+        console.error('Error in execute function:', error);
         return false;
+    } finally {
+        if (client) {
+            client.release(); // release the connection back to the pool
+        }
     }
 };
-
 /* 
 gen_random_uuid() A system function to generate a random Universally Unique IDentifier (UUID)
 An example of generated uuid:  32165102-4866-4d2d-b90c-7a2fddbb6bc8
@@ -48,4 +52,5 @@ execute(createTblQueryPosts).then(result => {
     }
 });
 
-module.exports = pool;
+module.exports = pool
+;

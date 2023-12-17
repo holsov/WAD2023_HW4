@@ -3,12 +3,11 @@
     <div id="post-list">
       <div class="container">
     <button v-if = "authResult" @click="Logout" class="center">Logout</button>
-              <!-- / add the router link when you create the view/  -->
     <button v-if = "authResult" @click="AddPost" class="center">Add post</button>
     <button v-if = "authResult" @click="DeleteAll" class="center">Delete all posts</button>
     </div>
       <ul>
-        <div class="item" v-for="post in posts" :key="post.id">
+        <div v-if = "authResult" class="item" v-for="post in posts" :key="post.id">
           <!-- / We are putting an anchor for each post, when we click on it, we will be directed to the specific post view (/apost/) /  -->
           <a class="singlepost" :href="'/api/apost/' + post.id">
               <span class="date">{{ post.date }} </span>
@@ -22,49 +21,48 @@
 
 
 <script>
+import auth from '../auth';
 export default {
   name: "AllPosts",
   data() {
     return {
       posts: [],
-      authResult: true //auth.authenticated()
+      authResult: auth.authenticated()
     };
   },
   methods: {
      Logout() { // cntrl + shift + // to comment out after adding jws verificaton
       console.log("logout initiated")
-    //   fetch("http://localhost:3000/auth/logout", {
-    //       credentials: 'include', //  Don't forget to specify this if you need cookies
-    //   })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     console.log('jwt removed');
-    //     //console.log('jwt removed:' + auth.authenticated());
-    //     this.$router.push("/login");
-    //     //location.assign("/");
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     console.log("error logout");
-    //   });
+      fetch("http://localhost:3000/auth/logout", {
+          credentials: 'include',
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log('jwt removed');
+        console.log('jwt removed:' + auth.authenticated());
+        this.$router.push("/login");
+        location.assign("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error logout");
+      });
      },
     fetchPosts() {
-      // You should remember how Fetch API works
-      // fetch is a GET request unless stated otherwise. Therefore, it will fetch all posts from the database
       fetch(`http://localhost:3000/api/posts/`,{
-        //credentials: 'include', //uncommment this once authentification is done
+        credentials: 'include', 
             })
         .then((response) => response.json())
         .then((data) => {
           this.posts = data
-          //console.log("json that we got")
+          console.log("json that we got")
         })
         .catch((err) => console.log(err.message));
     },
     DeleteAll() {
       fetch("http://localhost:3000/auth/deleteall", {
-          //credentials: 'include', //  Don't forget to specify this if you need cookies,
+          credentials: 'include', 
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
       })
