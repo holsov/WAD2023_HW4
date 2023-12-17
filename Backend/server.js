@@ -47,8 +47,8 @@ app.put('/api/posts/:id', async(req, res) => {
       const post = req.body;
       console.log("update request has arrived");
       const updatepost = await pool.query(
-          "UPDATE posts SET (body) = ($2) WHERE id = $1", [id, post.body]
-      );
+        "UPDATE posts SET body = $2 WHERE id = $1", [id, post.body]
+    );
       res.json(updatepost);
   } catch (err) {
       console.error(err.message);
@@ -82,7 +82,17 @@ app.post('/api/posts/', async (req, res) => {
         console.error(err.message);
     }
 }); 
-
-app.listen(port, () => {
-    console.log("Server is listening to port " + port)
+app.delete('/api/posts/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("delete a post request has arrived");
+    const deletepost = await pool.query(
+      "DELETE FROM posts WHERE id = $1",
+      [id]
+    );
+    res.json(deletepost);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'An error occurred while deleting the post' });
+  }
 });

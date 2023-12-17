@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     addPost() {
+      console.log("Got addpost")
       const data = {
         body: this.post.body,
         date: new Date().toLocaleDateString(),
@@ -39,7 +40,6 @@ export default {
       })
         .then((response) => {
           if (response.ok) {
-            // Assuming a successful response means the post was added
             console.log("Post added successfully");
             this.$router.push("/");
           } else {
@@ -48,10 +48,9 @@ export default {
         })
         .catch((error) => {
           console.error("Error adding post:", error);
-
         });
-    },
-  },
+          },
+        },
 };
 </script>
 
@@ -98,7 +97,7 @@ export default {
     font-size: x-large;
     width: max-content;
     margin-top: 30px;
-    /* Add button styles */
+  
   }
   input{
     border: none;
